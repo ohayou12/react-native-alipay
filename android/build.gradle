@@ -76,7 +76,9 @@ dependencies {
 
     // 支付宝 SDK AAR 包所需的配置
     // implementation (name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
-    implementation fileTree(dir: "libs", include: ["*.aar"])
+
+    // gradle4.1.0后不支持依赖库中打包.aar .jar文件，交由宿主项目打包该文件
+    compileOnly fileTree(dir: "libs", include: ["*.aar"])
 }
 
 def configureReactNativePom(def pom) {
@@ -100,7 +102,7 @@ def configureReactNativePom(def pom) {
 
         developers {
             developer {
-                id packageJson.author.username
+                id packageJson.author.name
                 name packageJson.author.name
             }
         }
